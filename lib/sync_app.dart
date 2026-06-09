@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sync_mobile/core/widgets/main_tab.dart';
+import 'package:sync_mobile/features/auth/presentation/screen/auth_screen.dart';
+import 'package:sync_mobile/features/auth/presentation/screen/otp_screen.dart';
+import 'package:sync_mobile/features/auth/presentation/widget/cupertino_form_example.dart';
 
 class SyncApp extends StatelessWidget {
-  final String title;
-  const SyncApp({super.key, required this.title});
+  const SyncApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MainTab();
+    return OtpScreen();
   }
 }

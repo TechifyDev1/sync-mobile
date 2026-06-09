@@ -4,6 +4,7 @@ import 'package:sync_mobile/core/theme/app_spacing.dart';
 import 'package:sync_mobile/shared/widget/custom_nav_bar.dart';
 
 import '../models/enums.dart';
+import '../widgets/build_avatar_with_type.dart';
 
 class CallScreen extends StatelessWidget {
   const CallScreen({super.key});
@@ -82,7 +83,6 @@ class CallScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   children: List.generate(13, (index) {
-                    // Mock varying statuses for visual reference
                     final type = index % 3 == 0
                         ? CallType.missed
                         : (index % 3 == 1
@@ -99,7 +99,7 @@ class CallScreen extends StatelessWidget {
                         horizontal: AppSpacing.sm,
                       ),
                       leadingSize: 50,
-                      leading: _buildAvatarWithType(
+                      leading: BuildAvatarWithType(
                         url: "https://unsplash.com",
                         type: type,
                       ),
@@ -138,45 +138,6 @@ class CallScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  // Optimized helper to build the contextual phone status badge over the avatar
-  Widget _buildAvatarWithType({required String url, required CallType type}) {
-    return Stack(
-      children: [
-        Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: CupertinoColors.systemGrey5, width: 1),
-            image: DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),
-          ),
-        ),
-        Positioned(
-          bottom: -2,
-          right: -2,
-          child: Container(
-            padding: const EdgeInsets.all(2),
-            decoration: const BoxDecoration(
-              color: CupertinoColors.white,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              type == CallType.missed
-                  ? CupertinoIcons.phone_badge_plus
-                  : (type == CallType.dialed
-                        ? CupertinoIcons.phone_arrow_up_right
-                        : CupertinoIcons.phone_arrow_down_left),
-              color: type == CallType.missed
-                  ? const Color(0xFFE53935)
-                  : CupertinoColors.black,
-              size: 14,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

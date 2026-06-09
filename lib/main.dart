@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sync_mobile/core/theme/app_theme.dart';
+import 'package:flutter/material.dart' show DefaultMaterialLocalizations;
 
 import 'sync_app.dart';
 
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      home: SyncApp(title: "Qudus!"),
+      localizationsDelegates: const [DefaultMaterialLocalizations.delegate],
+      home: SyncApp(),
       theme: AppTheme.cupertinoTheme,
     );
   }
