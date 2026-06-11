@@ -66,6 +66,7 @@ class DioClient {
           );
         }
       }
+
       if (error.response != null &&
           error.response!.data is Map<String, dynamic>) {
         final customException = DioException(
@@ -75,6 +76,20 @@ class DioClient {
           error: AppError.fromJson(error.response!.data),
         );
         return handler.reject(customException);
+      }
+
+      if (error.type == .connectionTimeout) {
+        final timeOutError = DioException(
+          requestOptions: error.requestOptions,
+          error: AppError(
+            title: "Time out",
+            message:
+                "Connection timed out, please check your internet connection",
+            status: 0,
+            timeStamp: DateTime.now().toIso8601String(),
+          ),
+        );
+        return handler.next(timeOutError);
       }
 
       return handler.next(error);
