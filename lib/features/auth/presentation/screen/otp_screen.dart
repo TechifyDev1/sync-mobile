@@ -16,6 +16,13 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  String _maskEmail(String email) {
+    final parts = email.split("@");
+    final username = parts[0];
+    final domain = parts[0];
+    if (username.length <= 2) {}
+  }
+
   PinTheme get _defaultPinTheme => PinTheme(
     width: 54,
     height: 60,

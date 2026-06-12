@@ -1,16 +1,18 @@
-import 'package:dio/dio.dart';
 import 'dart:developer' as dev;
-import 'package:sync_mobile/core/network/api_endpoints.dart';
-import 'package:sync_mobile/core/network/app_error.dart';
-import 'package:sync_mobile/core/storage/hive/hive_storage.dart';
-import 'package:sync_mobile/core/storage/hive/models/tokens.dart';
+
+import 'package:dio/dio.dart';
+
+import '../storage/hive/hive_storage.dart';
+import '../storage/hive/models/tokens.dart';
+import 'api_endpoints.dart';
+import 'app_error.dart';
 
 class DioClient {
   final Dio _dio;
   final HiveStorage _hiveStorage;
   DioClient._internal() : _dio = Dio(), _hiveStorage = HiveStorage() {
     _dio.options = _options;
-    _dio.interceptors.add(_interceptor);
+    _dio.interceptors.addAll([_interceptor, LogInterceptor()]);
   }
 
   bool _hasRefreshed = false;

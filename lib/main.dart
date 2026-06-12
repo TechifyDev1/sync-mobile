@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sync_mobile/core/theme/app_theme.dart';
 import 'package:flutter/material.dart' show DefaultMaterialLocalizations;
 
+import 'core/storage/hive/hive_storage.dart';
+import 'core/theme/app_theme.dart';
 import 'sync_app.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  HiveStorage().initAndOpenAllBoxes();
   runApp(const MyApp());
 }
 
